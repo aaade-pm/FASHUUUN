@@ -13,16 +13,18 @@ const Trending = () => {
           {data.map((product) => (
             <div
               key={product.id}
-              className="product-card border-1 border-solid border-black pt-2 mt-9 w-[300px] h-[400px] flex flex-col items-center gap-5 bg-white rounded-lg shadow-lg"
+              className="product-card border-1 border-solid border-black pt-2 mt-9 w-[300px] h-[400px] flex flex-col items-center gap-3 bg-white rounded-lg shadow-lg"
             >
               <div className="product-image w-[250] h-[250px]">
                 <img
                   src={product.image}
-                  alt={product.name}
+                  alt={product.title}
                   className="w-full h-full rounded-lg object-cover:fit"
                 />
               </div>
-              <h1 className="text-lg font-medium">{product.name}</h1>
+              <h1 className="text-lg font-medium text-center p-2">
+                {product.title}
+              </h1>
               <p className="text-lg font-medium">${product.price}</p>
             </div>
           ))}
