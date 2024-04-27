@@ -1,13 +1,17 @@
 import { openModal } from "../redux/slices/modalSlice";
+import { setCategory } from "../redux/slices/categorySlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 
 import { useGetProductsQuery } from "../redux/service/productData";
 import Modal from "../components/Modal";
+import CategoryButtons from "../components/CategoryButtons";
+import ProductCard from "../components/ProductCard";
 const Shop = () => {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const dispatch = useDispatch();
   const modalOpen = useSelector((state) => state.modal.modalOpen);
+  const categoryProducts = useSelector((state) => state.category.category);
   const { data, error, isLoading } = useGetProductsQuery();
   const products = data;
   if (isLoading) return <p>Loading...</p>;
@@ -19,32 +23,46 @@ const Shop = () => {
     dispatch(openModal());
   };
 
-  return (
-    <div className="grid sm:grid-cols-1 lg:grid-cols-3 place-items-center mt-9 mb-9 border-t-2 border-black-200">
-      {products
-        ? products.map((product, index) => (
-            <div
-              key={product.id}
-              onClick={() => handleToggleModal(index)}
-              className="product-card border-1 border-solid border-black pt-2 mt-9 md:w-[70vw] lg:w-[370px] xl:w-[300px] w-[75vw]  h-[400px] flex flex-col items-center gap-2 bg-white rounded-lg shadow-lg"
-            >
-              <div className="product-image w-[250px] h-[250px]">
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  className="w-full h-full rounded-lg object-cover:fit"
-                />
-              </div>
-              <h1 className="text-lg font-medium text-center p-2">
-                {product.title}
-              </h1>
-              <p className="text-lg font-medium">${product.price}</p>
-            </div>
-          ))
-        : null}
+  const categoryButton = (category) => {
+    const newProducts = products.filter(
+      (product) => product.category === category
+    );
+    dispatch(setCategory(newProducts));
+  };
 
-      {modalOpen && selectedProduct && <Modal product={selectedProduct} />}
-    </div>
+  const allProducts = () => {
+    dispatch(setCategory(null));
+  };
+
+  return (
+    <>
+      <CategoryButtons
+        handleCategoryClick={categoryButton}
+        handleAllProducts={allProducts}
+      />
+
+      <div className="grid sm:grid-cols-1 lg:grid-cols-3 place-items-center mt-9 mb-9 border-t-2 border-black-200">
+        {categoryProducts
+          ? categoryProducts.map((product, index) => (
+              <ProductCard
+                key={product.id}
+                product={product}
+                index={index}
+                handleToggleModal={handleToggleModal}
+              />
+            ))
+          : products.map((product, index) => (
+              <ProductCard
+                key={product.id}
+                product={product}
+                index={index}
+                handleToggleModal={handleToggleModal}
+              />
+            ))}
+
+        {modalOpen && selectedProduct && <Modal product={selectedProduct} />}
+      </div>
+    </>
   );
 };
 
