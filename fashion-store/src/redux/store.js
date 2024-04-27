@@ -3,11 +3,14 @@ import { productApi } from "./service/productData";
 import { setupListeners } from "@reduxjs/toolkit/query";
 import modalReducer from "./slices/modalSlice";
 import categoryReducer from "./slices/categorySlice";
+import mobileNavReducer from "./slices/mobileNavSlice";
+
 export const store = configureStore({
   reducer: {
     [productApi.reducerPath]: productApi.reducer,
     modal: modalReducer,
     category: categoryReducer,
+    mobileNav: mobileNavReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(productApi.middleware),
