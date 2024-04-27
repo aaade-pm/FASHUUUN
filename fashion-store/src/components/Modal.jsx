@@ -15,7 +15,7 @@ const Modal = ({ product }) => {
         size={30}
         className="absolute top-5 right-5"
       />
-      <div className="modal lg:flex grid justify-center lg:gap-48 gap-20">
+      <div className="modal lg:flex grid justify-center lg:gap-48 gap-16">
         <div className="product-image lg:w-[30vw] w-[50vw] lg:h-[75vh] md:h-[40vh] h-[30vh] mx-auto object-cover">
           <img
             src={product.image}
@@ -24,14 +24,14 @@ const Modal = ({ product }) => {
           />
         </div>
 
-        <div className="product-details lg:w-[40vw] w-full h-full grid place-items-center my-auto lg:gap-7 gap-3">
+        <div className="product-details lg:w-[40vw] w-full h-full grid place-items-center my-auto lg:gap-7 gap-2">
           <h1 className="text-black text-center font-bold md:text-3xl lg:text-4xl">
             {product.title}
           </h1>
           <p className="text-black text-center font-bold text-2xl">
             ${product.price}
           </p>
-          <p className="text-black text-center md:text-2xl md:p-8 lg:p-0 p-4">
+          <p className="text-black text-center md:text-2xl md:p-8 lg:p-0 px-2 ">
             {product.description}
           </p>
         </div>

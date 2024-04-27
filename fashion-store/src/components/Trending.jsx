@@ -22,11 +22,11 @@ const Trending = () => {
   return (
     <div>
       {selectedProduct && modalOpen && <Modal product={selectedProduct} />}
-      <div className=" mx-9 h-[100vh]  bg-slate-200">
+      <div className=" lg:mx-9 mx-0 lg:h-[85vh] md:h-[1570px] h-[1450px]  bg-slate-200">
         <div className="flex justify-center">
           <h1 className="text-4xl font-bold text-black mt-9">Trending</h1>
         </div>
-        <div className="flex justify-center mx-6 my-5 gap-20">
+        <div className="lg:flex grid place-items-center justify-center mx-6 lg:my-5 my-0 lg:gap-20 gap-2 ">
           {products
             ? products.map((product, index) => (
                 <ProductCard
