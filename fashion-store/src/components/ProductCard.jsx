@@ -13,7 +13,7 @@ const ProductCard = ({ product, index, handleToggleModal }) => {
         />
       </div>
       <h1 className="text-lg font-medium text-center p-2">{product.title}</h1>
-      <div className="price-cart grid  gap-3 justify-center px-2 ">
+      <div className="price-cart grid  gap-3 justify-center px-2 pb-2 ">
         <p className="text-3xl  font-bold">${product.price}</p>
         <AddToCartButton
           id={product.id}
