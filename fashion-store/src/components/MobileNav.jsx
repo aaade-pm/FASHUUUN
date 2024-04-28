@@ -6,7 +6,7 @@ const MobileNav = ({ mobileNavOpen, handleCloseMobileNav }) => {
   return (
     <div>
       {mobileNavOpen && (
-        <div className="mobile-nav w-[75vw] h-[100vh]  fixed top-0 left-0 bg-white z-[100] grid place-items-center">
+        <div className="mobile-nav w-[75vw] h-[100vh]  fixed top-0 left-0 bg-white z-[1000] grid place-items-center">
           <RiCloseFill
             size={40}
             className="absolute top-5 right-9 md:right-20 md:top-10 "
@@ -19,6 +19,9 @@ const MobileNav = ({ mobileNavOpen, handleCloseMobileNav }) => {
                 {link.name}
               </a>
             ))}
+            <a href="/cart" className="font-bold">
+              Cart
+            </a>
           </div>
         </div>
       )}
