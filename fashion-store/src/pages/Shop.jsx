@@ -7,6 +7,7 @@ import { useGetProductsQuery } from "../redux/service/productData";
 import Modal from "../components/Modal";
 import CategoryButtons from "../components/CategoryButtons";
 import ProductCard from "../components/ProductCard";
+import Navbar from "../components/Navbar";
 const Shop = () => {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const dispatch = useDispatch();
@@ -36,6 +37,7 @@ const Shop = () => {
 
   return (
     <>
+      <Navbar />
       <CategoryButtons
         handleCategoryClick={categoryButton}
         handleAllProducts={allProducts}

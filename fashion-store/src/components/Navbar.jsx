@@ -2,15 +2,18 @@ import { FaOpencart, FaUserAlt } from "react-icons/fa";
 import { HiMenuAlt3 } from "react-icons/hi";
 import { openMobileNav, closeMobileNav } from "../redux/slices/mobileNavSlice";
 import { triggerCart } from "../redux/slices/cartTriggerSlice";
+import { profileTrigger } from "../redux/slices/profileSlice";
 import { useDispatch, useSelector } from "react-redux";
 import Navlinks from "../constants";
 import MobileNav from "./MobileNav";
 import Cart from "./Cart";
+import ProfileDisplay from "./ProfileDisplay";
 
 const Navbar = () => {
   const dispatch = useDispatch();
   const mobileNavOpen = useSelector((state) => state.mobileNav.mobileNavOpen);
   const cartTrigger = useSelector((state) => state.cartTrigger.cartTrigger);
+  const userProfile = useSelector((state) => state.userProfile.profileOpen);
 
   const handleOpenMobileNav = () => {
     dispatch(openMobileNav());
@@ -22,7 +25,10 @@ const Navbar = () => {
 
   const handleOpenCart = () => {
     dispatch(triggerCart());
-    console.log("cart opened");
+  };
+
+  const handleOpenProfile = () => {
+    dispatch(profileTrigger());
   };
 
   return (
@@ -48,7 +54,7 @@ const Navbar = () => {
             <FaOpencart onClick={handleOpenCart} />
           </div>
           <div className="user text-2xl">
-            <FaUserAlt />
+            <FaUserAlt onClick={handleOpenProfile} />
           </div>
         </div>
         <div className="menu-icon lg:hidden">
@@ -56,6 +62,7 @@ const Navbar = () => {
         </div>
       </div>
       {cartTrigger && <Cart />}
+      {userProfile && <ProfileDisplay />}
     </>
   );
 };

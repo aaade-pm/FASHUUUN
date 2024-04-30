@@ -6,6 +6,8 @@ import categoryReducer from "./slices/categorySlice";
 import mobileNavReducer from "./slices/mobileNavSlice";
 import addToCartReducer from "./slices/addToCartSlice";
 import cartTriggerReducer from "./slices/cartTriggerSlice";
+import userReducer from "./slices/userSlice";
+import userProfileReducer from "./slices/profileSlice";
 
 export const store = configureStore({
   reducer: {
@@ -15,6 +17,8 @@ export const store = configureStore({
     mobileNav: mobileNavReducer,
     addToCart: addToCartReducer,
     cartTrigger: cartTriggerReducer,
+    user: userReducer,
+    userProfile: userProfileReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(productApi.middleware),
