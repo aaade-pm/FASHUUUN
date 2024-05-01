@@ -9,8 +9,8 @@ const LoginPage = () => {
   useEffect(() => {
     supabase.auth.onAuthStateChange(async (event) => {
       if (event === "SIGNED_IN") {
-        navigate("/home");
-      } else {
+        navigate("/");
+      } else if (event === "SIGNED_OUT") {
         navigate("/");
       }
     });
