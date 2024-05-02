@@ -9,18 +9,26 @@ import supabase from "../supabase";
 const Cart = () => {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.addToCart.cart);
+  const user = useSelector((state) => state.user.user);
 
   useEffect(() => {
     getProducts();
   }, []);
   async function getProducts() {
     try {
-      const { data, error } = await supabase.from("cart_products").select("*");
-      if (error) {
-        throw error;
-      }
-      if (data !== null) {
-        dispatch(addToCart(data));
+      if (user && user.id) {
+        const { data, error } = await supabase
+          .from("cart_products")
+          .select("*")
+          .eq("user_id", user.id);
+        if (error) {
+          throw error;
+        }
+        if (data !== null) {
+          dispatch(addToCart(data));
+        }
+      } else {
+        alert("You need to be logged in to view the cart.");
       }
     } catch (error) {
       alert(error.message);
@@ -33,16 +41,20 @@ const Cart = () => {
 
   async function deleteItem(itemId) {
     try {
-      const { error } = await supabase
-        .from("cart_products")
-        .delete()
-        .eq("id", itemId);
+      if (user && user.id) {
+        const { error } = await supabase
+          .from("cart_products")
+          .delete()
+          .eq("id", itemId)
+          .eq("user_id", user.id);
+        if (error) {
+          throw error;
+        }
 
-      if (error) {
-        throw error;
+        dispatch(removeFromCart({ id: itemId }));
+      } else {
+        alert("You need to be logged in to delete an item from the cart.");
       }
-
-      dispatch(removeFromCart({ id: itemId }));
     } catch (error) {
       alert("An error occurred while deleting the item.");
     }
@@ -75,7 +87,7 @@ const Cart = () => {
                 </div>
                 <div className="details-and-remove w-[300px] flex justify-between place-items-center mx-2 text-black">
                   <div className="cart-details">
-                    <h1>{piece.title}</h1>
+                    <h1 className="font-bold">{piece.title}</h1>
                     <p>${piece.price}</p>
                   </div>
 

@@ -29,6 +29,7 @@ const ProfileDisplay = () => {
 
   const signInUser = () => {
     navigate("/login");
+    window.location.reload();
   };
 
   return (
@@ -39,7 +40,7 @@ const ProfileDisplay = () => {
           USER:
           {user && user !== null ? (
             <>
-              <span>{user.email}</span>
+              <span>{user.email}</span>{" "}
             </>
           ) : (
             <span> You are not a member yet?</span>
