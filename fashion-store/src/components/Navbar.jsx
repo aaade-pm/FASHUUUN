@@ -40,7 +40,7 @@ const Navbar = () => {
 
       <div className="flex justify-between  lg:mx-5 md:mx-5 mx-3 my-3">
         <div className="logo">
-          <h1 className="text-2xl font-medium">FASHUUUN</h1>
+          <h1 className="text-2xl  font-serif font-bold">FASHUUUN</h1>
         </div>
         <div className="nav-links text-2 lg:flex lg:visible hidden gap-6 text-center mt-2 ">
           {Navlinks.map((link) => (

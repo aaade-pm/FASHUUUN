@@ -8,6 +8,7 @@ import addToCartReducer from "./slices/addToCartSlice";
 import cartTriggerReducer from "./slices/cartTriggerSlice";
 import userReducer from "./slices/userSlice";
 import userProfileReducer from "./slices/profileSlice";
+import loadingReducer from "./slices/loadingSlice";
 
 export const store = configureStore({
   reducer: {
@@ -19,6 +20,7 @@ export const store = configureStore({
     cartTrigger: cartTriggerReducer,
     user: userReducer,
     userProfile: userProfileReducer,
+    loading: loadingReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(productApi.middleware),

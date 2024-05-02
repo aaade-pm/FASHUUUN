@@ -4,13 +4,14 @@ import Modal from "./Modal";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import { openModal } from "../redux/slices/modalSlice";
+import Loader from "./Loader";
 
 const Trending = () => {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const dispatch = useDispatch();
   const modalOpen = useSelector((state) => state.modal.modalOpen);
   const { data, error, isLoading } = useGetTrendingQuery();
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) return <Loader color={"#000"} />;
   if (error) return <p>Error: {error.message}</p>;
   const products = data;
   const handleToggleModal = (index) => {

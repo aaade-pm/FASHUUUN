@@ -1,9 +1,10 @@
 import { useGetCategoriesQuery } from "../redux/service/productData";
 import PropTypes from "prop-types";
+import Loader from "./Loader";
 
 const CategoryButtons = ({ handleCategoryClick, handleAllProducts }) => {
   const { data, error, isLoading } = useGetCategoriesQuery();
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) return <Loader color={"#000"} />;
   if (error) return <p>Error: {error.message}</p>;
   const categories = data;
   return (

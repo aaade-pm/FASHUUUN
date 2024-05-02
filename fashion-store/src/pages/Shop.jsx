@@ -8,6 +8,7 @@ import Modal from "../components/Modal";
 import CategoryButtons from "../components/CategoryButtons";
 import ProductCard from "../components/ProductCard";
 import Navbar from "../components/Navbar";
+import Loader from "../components/Loader";
 const Shop = () => {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const dispatch = useDispatch();
@@ -15,7 +16,7 @@ const Shop = () => {
   const categoryProducts = useSelector((state) => state.category.category);
   const { data, error, isLoading } = useGetProductsQuery();
   const products = data;
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) return <Loader color={"#000"} />;
   if (error) return <p>Error: {error.message}</p>;
 
   const handleToggleModal = (index) => {

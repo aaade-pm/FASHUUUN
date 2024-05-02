@@ -10,15 +10,16 @@ const ProfileDisplay = () => {
   const user = useSelector((state) => state.user.user);
 
   useEffect(() => {
-    async function getUserData() {
-      await supabase.auth.getUser().then((value) => {
-        if (value.data?.user) {
-          dispatch(setUser(value.data.user));
-        }
-      });
-    }
     getUserData();
-  }, [dispatch]);
+  }, []);
+
+  async function getUserData() {
+    await supabase.auth.getUser().then((value) => {
+      if (value.data?.user) {
+        dispatch(setUser(value.data.user));
+      }
+    });
+  }
 
   async function signOutUser() {
     await supabase.auth.signOut();
