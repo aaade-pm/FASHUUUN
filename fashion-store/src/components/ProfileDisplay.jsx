@@ -40,7 +40,6 @@ const ProfileDisplay = () => {
           {user && user !== null ? (
             <>
               <span>{user.email}</span>
-              <span>{user.id}</span>
             </>
           ) : (
             <span> You are not a member yet?</span>
