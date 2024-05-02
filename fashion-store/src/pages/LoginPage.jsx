@@ -7,11 +7,13 @@ import supabase from "../supabase";
 const LoginPage = () => {
   const navigate = useNavigate();
   useEffect(() => {
-    supabase.auth.onAuthStateChange(async (event) => {
-      if (event === "SIGNED_IN") {
+    supabase.auth.onAuthStateChange(async (event, session) => {
+      if (session !== null && event === "SIGNED_IN") {
         navigate("/");
-      } else if (event === "SIGNED_OUT") {
+        window.location.reload();
+      } else if (session === null && event === "SIGNED_OUT") {
         navigate("/");
+        window.location.reload();
       }
     });
   }, [navigate]);

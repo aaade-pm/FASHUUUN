@@ -1,19 +1,53 @@
 import { useDispatch, useSelector } from "react-redux";
 import { triggerCart } from "../redux/slices/cartTriggerSlice";
-import { removeFromCart } from "../redux/slices/addToCartSlice";
+import { addToCart, removeFromCart } from "../redux/slices/addToCartSlice";
 import { RiCloseFill } from "react-icons/ri";
 import { MdOutlineDeleteForever } from "react-icons/md";
+import { useEffect } from "react";
+import supabase from "../supabase";
 
 const Cart = () => {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.addToCart.cart);
+
+  useEffect(() => {
+    getProducts();
+  }, []);
+  async function getProducts() {
+    try {
+      const { data, error } = await supabase.from("cart_products").select("*");
+      if (error) {
+        throw error;
+      }
+      if (data !== null) {
+        dispatch(addToCart(data));
+      }
+    } catch (error) {
+      alert(error.message);
+    }
+  }
+
   const handleCloseCart = () => {
     dispatch(triggerCart());
   };
 
-  const handleRemoveFromCart = (id) => {
-    dispatch(removeFromCart({ id }));
-  };
+  async function deleteItem(itemId) {
+    try {
+      const { error } = await supabase
+        .from("cart_products")
+        .delete()
+        .eq("id", itemId);
+
+      if (error) {
+        throw error;
+      }
+
+      dispatch(removeFromCart({ id: itemId }));
+    } catch (error) {
+      alert("An error occurred while deleting the item.");
+    }
+  }
+
   return (
     <div>
       <div className="lg:w-[450px] w-full lg:h-[320px] h-full z-[100] absolute top-16 lg:right-1 py-3 bg-black overflow-y-scroll">
@@ -24,29 +58,29 @@ const Cart = () => {
           Cart
         </h1>
         <div className="cart-item grid gap-2 py-4">
-          {cart.length > 0 ? (
-            cart.map((item) => (
+          {cart ? (
+            cart.map((piece) => (
               <div
-                key={item.id}
+                key={piece.id}
                 className=" w-[400px] h-[125px] flex place-items-center bg-white mx-4 p-2 rounded-md"
               >
                 <div className="cart-content ">
                   <div className="cart-image h-[95px] w-[90px] ">
                     <img
-                      src={item.image}
+                      src={piece.image}
                       alt=""
                       className="w-full h-full object-cover"
                     />
                   </div>
                 </div>
-                <div className="details-and-remove w-[300px] flex justify-between place-items-center mx-2">
+                <div className="details-and-remove w-[300px] flex justify-between place-items-center mx-2 text-black">
                   <div className="cart-details">
-                    <h1>{item.title}</h1>
-                    <p>${item.price}</p>
+                    <h1>{piece.title}</h1>
+                    <p>${piece.price}</p>
                   </div>
 
                   <div className="cart-remove">
-                    <button onClick={() => handleRemoveFromCart(item.id)}>
+                    <button onClick={() => deleteItem(piece.id)}>
                       <MdOutlineDeleteForever size={30} />
                     </button>
                   </div>

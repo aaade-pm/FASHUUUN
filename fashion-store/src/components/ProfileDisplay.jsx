@@ -22,8 +22,9 @@ const ProfileDisplay = () => {
 
   async function signOutUser() {
     await supabase.auth.signOut();
-    navigate("/");
     dispatch(setUser(null));
+    navigate("/");
+    window.location.reload();
   }
 
   const signInUser = () => {
@@ -36,8 +37,11 @@ const ProfileDisplay = () => {
       <div>
         <p className="border-b-2 w-[280px] text-center py-3 font-bold">
           USER:
-          {user ? (
-            <span>{user.email}</span>
+          {user && user !== null ? (
+            <>
+              <span>{user.email}</span>
+              <span>{user.id}</span>
+            </>
           ) : (
             <span> You are not a member yet?</span>
           )}

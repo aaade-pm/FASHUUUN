@@ -1,18 +1,41 @@
 import { useDispatch } from "react-redux";
 import { addToCart } from "../redux/slices/addToCartSlice";
 import ProtoTypes from "prop-types";
-const AddToCartButton = ({ id, title, price, image }) => {
+import supabase from "../supabase";
+
+const AddToCartButton = (props) => {
+  const { id, title, price, image } = props;
+
   const dispatch = useDispatch();
-  const handleAddToCart = () => {
-    dispatch(
-      addToCart({
-        id,
-        title,
-        price,
-        image,
-      })
-    );
-  };
+
+  async function handleAddToCart() {
+    try {
+      const { data, error } = await supabase
+        .from("cart_products")
+        .insert({
+          id: id,
+          title: title,
+          price: price,
+          image: image,
+        })
+        .single();
+
+      if (error) {
+        if (error.details?.includes("already exists")) {
+          alert("Item already exists in the cart.");
+        } else {
+          throw error;
+        }
+      }
+
+      if (data !== null) {
+        dispatch(addToCart(data));
+      }
+    } catch (error) {
+      alert(error.message);
+    }
+  }
+
   return (
     <div>
       <button
