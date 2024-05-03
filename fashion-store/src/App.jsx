@@ -16,13 +16,13 @@ const App = () => {
     getUserData();
   });
 
-  async function getUserData() {
+  const getUserData = async () => {
     await supabase.auth.getUser().then((value) => {
       if (value.data?.user) {
         dispatch(setUser(value.data.user));
       }
     });
-  }
+  };
 
   return (
     <>

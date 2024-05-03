@@ -18,7 +18,7 @@ const Cart = () => {
     getProducts();
   }, []);
 
-  async function getProducts() {
+  const getProducts = async () => {
     try {
       if (user?.id) {
         const { data, error } = await supabase
@@ -37,12 +37,12 @@ const Cart = () => {
     } finally {
       dispatch(setLoading(false));
     }
-  }
+  };
   const handleCloseCart = () => {
     dispatch(triggerCart());
   };
 
-  async function deleteItem(itemId) {
+  const deleteItem = async (itemId) => {
     try {
       if (user && user.id) {
         const { error } = await supabase
@@ -59,7 +59,7 @@ const Cart = () => {
     } catch (error) {
       alert("An error occurred while deleting the item.");
     }
-  }
+  };
 
   return (
     <div>

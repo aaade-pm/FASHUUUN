@@ -6,12 +6,19 @@ import supabase from "../supabase";
 const AddToCartButton = (props) => {
   const { id, title, price, image } = props;
   const user = useSelector((state) => state.user.user);
+  const cart = useSelector((state) => state.addToCart.cart);
 
   const dispatch = useDispatch();
 
-  async function handleAddToCart() {
+  const handleAddToCart = async () => {
     try {
       if (user && user.id) {
+        const isItemInCart = cart?.some((item) => item.id === id);
+        if (isItemInCart) {
+          alert("Item already exists in the cart.");
+          return;
+        }
+
         const { data, error } = await supabase
           .from("cart_products")
           .insert({
@@ -31,14 +38,14 @@ const AddToCartButton = (props) => {
           }
         }
 
-        if (data !== null) {
+        if (data !== null && !isItemInCart) {
           dispatch(addToCart(data));
         }
       }
     } catch (error) {
       alert(error.message);
     }
-  }
+  };
 
   return (
     <div>
