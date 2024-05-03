@@ -20,7 +20,7 @@ const Cart = () => {
 
   async function getProducts() {
     try {
-      if (user && user.id) {
+      if (user?.id) {
         const { data, error } = await supabase
           .from("cart_products")
           .select("*")
@@ -30,14 +30,14 @@ const Cart = () => {
         }
         if (data !== null) {
           dispatch(addToCart(data));
-          dispatch(setLoading(false));
         }
       }
     } catch (error) {
       alert(error.message);
+    } finally {
+      dispatch(setLoading(false));
     }
   }
-
   const handleCloseCart = () => {
     dispatch(triggerCart());
   };

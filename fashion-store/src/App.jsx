@@ -5,8 +5,25 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import MobileCart from "./components/MobileCart";
 import LoginPage from "./pages/LoginPage";
+import { useEffect } from "react";
+import { setUser } from "./redux/slices/userSlice";
+import { useDispatch } from "react-redux";
+import supabase from "./supabase";
 
 const App = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    getUserData();
+  });
+
+  async function getUserData() {
+    await supabase.auth.getUser().then((value) => {
+      if (value.data?.user) {
+        dispatch(setUser(value.data.user));
+      }
+    });
+  }
+
   return (
     <>
       <Router>

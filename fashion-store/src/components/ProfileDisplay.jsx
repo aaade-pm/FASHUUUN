@@ -2,24 +2,12 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import supabase from "../supabase";
 import { setUser } from "../redux/slices/userSlice";
-import { useEffect } from "react";
+// import { useEffect } from "react";
 
 const ProfileDisplay = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user);
-
-  useEffect(() => {
-    getUserData();
-  }, []);
-
-  async function getUserData() {
-    await supabase.auth.getUser().then((value) => {
-      if (value.data?.user) {
-        dispatch(setUser(value.data.user));
-      }
-    });
-  }
 
   async function signOutUser() {
     await supabase.auth.signOut();
@@ -37,11 +25,10 @@ const ProfileDisplay = () => {
     <div className=" h-[300px] w-[300px] rounded-lg bg-black text-white absolute top-16 right-5 z-[100] flex flex-col place-items-center">
       <h1 className="mt-4">User Profile</h1>
       <div>
-        <p className="border-b-2 w-[280px] text-center py-3 font-bold">
-          USER:
+        <p className="border-b-2 w-[300px] text-center py-3 font-bold">
           {user && user !== null ? (
             <>
-              <span>{user.email}</span>{" "}
+              <span className="text-wrap">{user.email}</span>
             </>
           ) : (
             <span> You are not a member yet?</span>
