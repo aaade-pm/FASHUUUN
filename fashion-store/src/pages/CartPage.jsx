@@ -50,7 +50,7 @@ const CartPage = () => {
             style={{ width: "90%" }}
             className="cart-itempy-4 border-2 border-black mx-auto my-7 py-3"
           >
-            <CartList bg={"#fff"} text={"#000"} width={95} />
+            <CartList bg={"#fff"} text={"#000"} cartText={"#000"} width={95} />
           </div>
         )}
       </div>

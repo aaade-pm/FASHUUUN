@@ -23,7 +23,7 @@ const Trending = () => {
   return (
     <div>
       {selectedProduct && modalOpen && <Modal product={selectedProduct} />}
-      <div className=" lg:mx-9 mx-0 lg:h-[630px] md:h-[1600x] h-[1610px]  bg-slate-200">
+      <div className=" lg:mx-9 mx-0 lg:h-[650px] md:h-[1600x] h-[1700px]  bg-slate-200">
         <div className="flex justify-center">
           <h1 className="text-4xl font-bold text-black mt-9">Trending</h1>
         </div>

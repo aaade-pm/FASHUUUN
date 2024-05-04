@@ -1,13 +1,13 @@
-import { FaOpencart, FaUserAlt } from "react-icons/fa";
 import { HiMenuAlt3 } from "react-icons/hi";
+import { FaOpencart } from "react-icons/fa";
 import { openMobileNav, closeMobileNav } from "../redux/slices/mobileNavSlice";
 import { triggerCart } from "../redux/slices/cartTriggerSlice";
-import { profileTrigger } from "../redux/slices/profileSlice";
 import { useDispatch, useSelector } from "react-redux";
 import Navlinks from "../constants";
 import MobileNav from "./MobileNav";
 import Cart from "./Cart";
 import ProfileDisplay from "./ProfileDisplay";
+import ProfileIcon from "./ProfileIcon";
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -25,10 +25,6 @@ const Navbar = () => {
 
   const handleOpenCart = () => {
     dispatch(triggerCart());
-  };
-
-  const handleOpenProfile = () => {
-    dispatch(profileTrigger());
   };
 
   return (
@@ -57,12 +53,13 @@ const Navbar = () => {
           <div className="cart text-2xl">
             <FaOpencart onClick={handleOpenCart} />
           </div>
-          <div className="user text-2xl">
-            <FaUserAlt onClick={handleOpenProfile} />
-          </div>
+          <ProfileIcon />
         </div>
-        <div className="menu-icon lg:hidden">
-          <HiMenuAlt3 size={30} onClick={handleOpenMobileNav} />
+        <div className="flex gap-3 lg:hidden place-items-center">
+          <ProfileIcon />
+          <div className="menu-icon">
+            <HiMenuAlt3 size={30} onClick={handleOpenMobileNav} />
+          </div>
         </div>
       </div>
       {cartTrigger && <Cart />}

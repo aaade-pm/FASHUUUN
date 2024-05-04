@@ -54,7 +54,7 @@ const Cart = () => {
           <Loader color="#fff" />
         ) : (
           <div className="cart-item py-4">
-            <CartList bg={"#fff"} text={"#000"} width={95} />
+            <CartList bg={"#fff"} text={"#000"} cartText={"#fff"} width={95} />
           </div>
         )}
       </div>

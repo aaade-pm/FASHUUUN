@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import supabase from "../supabase";
 import PropTypes from "prop-types";
 
-const CartList = ({ bg, text, width }) => {
+const CartList = ({ bg, text, cartText, width }) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user);
   const cart = useSelector((state) => state.addToCart.cart);
@@ -49,7 +49,7 @@ const CartList = ({ bg, text, width }) => {
             <div className="details-and-remove w-[300px] flex justify-between place-items-center mx-2 ">
               <div className="cart-details">
                 <h1 className="font-bold">{piece.title}</h1>
-                <p>${piece.price}</p>
+                <p>${piece.price.toFixed(2)}</p>
               </div>
 
               <div className="cart-remove">
@@ -62,7 +62,7 @@ const CartList = ({ bg, text, width }) => {
         ))
       ) : (
         <div className="empty-cart grid place-items-center mt-20 font-bold text-2xl">
-          <p className="text-black">Cart is empty</p>
+          <p style={{ color: cartText }}>Cart is empty</p>
         </div>
       )}
     </div>
@@ -72,6 +72,7 @@ const CartList = ({ bg, text, width }) => {
 CartList.propTypes = {
   bg: PropTypes.string,
   text: PropTypes.string,
+  cartText: PropTypes.string,
   width: PropTypes.number,
 };
 export default CartList;

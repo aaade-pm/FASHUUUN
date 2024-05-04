@@ -8,7 +8,6 @@ const Footer = () => {
             <a href="/">Home</a>
             <a href="/shop">Shop</a>
             <a href="/about">About</a>
-            <a href="/contact">Contact</a>
           </div>
         </div>
         <div className="more-info">
@@ -25,7 +24,6 @@ const Footer = () => {
             <a href="/">FAQ</a>
             <a href="/shop">Terms of use</a>
             <a href="/about">Privacy Policy</a>
-            <a href="/contact">Discount system</a>
           </div>
         </div>
         <div className="newsletter">

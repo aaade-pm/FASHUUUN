@@ -1,8 +1,8 @@
 import { useSelector, useDispatch } from "react-redux";
+import { FaRegHeart } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import supabase from "../supabase";
 import { setUser } from "../redux/slices/userSlice";
-// import { FaRegHeart } from "react-icons/fa";
 
 const ProfileDisplay = () => {
   const navigate = useNavigate();
@@ -22,7 +22,7 @@ const ProfileDisplay = () => {
   };
 
   return (
-    <div className=" h-[300px] w-[300px] rounded-lg bg-black text-white absolute top-16 right-5 z-[100] flex flex-col place-items-center">
+    <div className=" h-[300px] w-[300px] rounded-lg bg-black text-white absolute lg:top-16 lg:right-5 right-2 z-[100] flex flex-col place-items-center">
       <h1 className="mt-4">User Profile</h1>
       <div>
         <p className="border-b-2 w-[300px] text-center py-3 font-bold">
@@ -52,11 +52,16 @@ const ProfileDisplay = () => {
           )}
         </div>
       </div>
-      {/* <div className=" border-2 border-white mt-4 w-[280px] text-center flex justify-center place-items-center content-center gap-1 py-1 hover:bg-white hover:text-black">
+      <div
+        onClick={() => {
+          navigate("/cart");
+        }}
+        className=" border-2 border-white mt-4 w-[280px] text-center flex lg:hidden justify-center place-items-center content-center gap-1 py-1 hover:bg-white hover:text-black"
+      >
         <FaRegHeart size={16} />
 
         <button>Saved Items</button>
-      </div> */}
+      </div>
     </div>
   );
 };
