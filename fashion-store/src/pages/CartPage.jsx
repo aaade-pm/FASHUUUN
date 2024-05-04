@@ -1,42 +1,12 @@
 import CartList from "../components/CartList";
 import Navbar from "../components/Navbar";
 import Loader from "../components/Loader";
-import { useSelector, useDispatch } from "react-redux";
-import { useEffect } from "react";
-import { addToCart } from "../redux/slices/addToCartSlice";
-import { setLoading } from "../redux/slices/loadingSlice";
-import supabase from "../supabase";
+import { useSelector } from "react-redux";
+import useGetProducts from "../custom_hooks/useGetProducts";
 
 const CartPage = () => {
-  const dispatch = useDispatch();
+  useGetProducts();
   const loading = useSelector((state) => state.loading.isLoading);
-  const user = useSelector((state) => state.user.user);
-
-  useEffect(() => {
-    getProducts();
-  });
-
-  const getProducts = async () => {
-    try {
-      if (user?.id) {
-        const { data, error } = await supabase
-          .from("cart_products")
-          .select("*")
-          .eq("user_id", user.id);
-        if (error) {
-          throw error;
-        }
-        if (data !== null) {
-          dispatch(addToCart(data));
-          console.log("hippppp");
-        }
-      }
-    } catch (error) {
-      alert(error.message);
-    } finally {
-      dispatch(setLoading(false));
-    }
-  };
 
   return (
     <>
