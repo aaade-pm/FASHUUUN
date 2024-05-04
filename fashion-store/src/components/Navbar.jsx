@@ -44,7 +44,11 @@ const Navbar = () => {
         </div>
         <div className="nav-links text-2 lg:flex lg:visible hidden gap-6 text-center mt-2 ">
           {Navlinks.map((link) => (
-            <a href={link.path} key={link.name}>
+            <a
+              href={link.path}
+              key={link.name}
+              className="hover:border-b-2 hover:border-black transition duration-300 ease-in-out"
+            >
               {link.name}
             </a>
           ))}

@@ -2,7 +2,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import supabase from "../supabase";
 import { setUser } from "../redux/slices/userSlice";
-// import { useEffect } from "react";
+// import { FaRegHeart } from "react-icons/fa";
 
 const ProfileDisplay = () => {
   const navigate = useNavigate();
@@ -52,6 +52,11 @@ const ProfileDisplay = () => {
           )}
         </div>
       </div>
+      {/* <div className=" border-2 border-white mt-4 w-[280px] text-center flex justify-center place-items-center content-center gap-1 py-1 hover:bg-white hover:text-black">
+        <FaRegHeart size={16} />
+
+        <button>Saved Items</button>
+      </div> */}
     </div>
   );
 };

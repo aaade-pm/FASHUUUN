@@ -3,15 +3,16 @@ import HomePage from "./pages/HomePage";
 import Shop from "./pages/Shop";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
-import MobileCart from "./components/MobileCart";
 import LoginPage from "./pages/LoginPage";
 import { useEffect } from "react";
 import { setUser } from "./redux/slices/userSlice";
 import { useDispatch } from "react-redux";
 import supabase from "./supabase";
+import CartPage from "./pages/CartPage";
 
 const App = () => {
   const dispatch = useDispatch();
+
   useEffect(() => {
     getUserData();
   });
@@ -33,7 +34,7 @@ const App = () => {
           <Route path="/shop" element={<Shop />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/cart" element={<MobileCart />} />
+          <Route path="/cart" element={<CartPage />} />
         </Routes>
       </Router>
     </>

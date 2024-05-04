@@ -1,17 +1,16 @@
-import { useDispatch, useSelector } from "react-redux";
-import { triggerCart } from "../redux/slices/cartTriggerSlice";
+import CartList from "../components/CartList";
+import Navbar from "../components/Navbar";
+import Loader from "../components/Loader";
+import { useSelector, useDispatch } from "react-redux";
+import { useEffect } from "react";
 import { addToCart } from "../redux/slices/addToCartSlice";
 import { setLoading } from "../redux/slices/loadingSlice";
-import { RiCloseFill } from "react-icons/ri";
-import { useEffect } from "react";
-import CartList from "./CartList";
 import supabase from "../supabase";
-import Loader from "./Loader";
 
-const Cart = () => {
+const CartPage = () => {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.user.user);
   const loading = useSelector((state) => state.loading.isLoading);
+  const user = useSelector((state) => state.user.user);
 
   useEffect(() => {
     getProducts();
@@ -29,6 +28,7 @@ const Cart = () => {
         }
         if (data !== null) {
           dispatch(addToCart(data));
+          console.log("hippppp");
         }
       }
     } catch (error) {
@@ -37,29 +37,25 @@ const Cart = () => {
       dispatch(setLoading(false));
     }
   };
-  const handleCloseCart = () => {
-    dispatch(triggerCart());
-  };
 
   return (
-    <div>
-      <div className="lg:w-[450px] w-full lg:h-[320px] h-full z-[100] absolute top-16 lg:right-1 py-3 bg-black overflow-y-scroll">
-        <button onClick={handleCloseCart} className="text-white">
-          <RiCloseFill size={30} className="absolute top-3 right-5" />
-        </button>
-        <h1 className="text-white absolute top-3 left-5 font-bold text-xl">
-          Cart
-        </h1>
+    <>
+      <Navbar />
+      <div>
+        <h1 className="font-bold text-2xl text-center mt-8">Cart Page</h1>
         {loading ? (
           <Loader color="#fff" />
         ) : (
-          <div className="cart-item py-4">
+          <div
+            style={{ width: "90%" }}
+            className="cart-itempy-4 border-2 border-black mx-auto my-7 py-3"
+          >
             <CartList bg={"#fff"} text={"#000"} width={95} />
           </div>
         )}
       </div>
-    </div>
+    </>
   );
 };
 
-export default Cart;
+export default CartPage;

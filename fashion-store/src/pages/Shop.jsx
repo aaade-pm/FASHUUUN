@@ -9,6 +9,7 @@ import CategoryButtons from "../components/CategoryButtons";
 import ProductCard from "../components/ProductCard";
 import Navbar from "../components/Navbar";
 import Loader from "../components/Loader";
+
 const Shop = () => {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const dispatch = useDispatch();
@@ -43,7 +44,6 @@ const Shop = () => {
         handleCategoryClick={categoryButton}
         handleAllProducts={allProducts}
       />
-
       <div className="grid sm:grid-cols-1 lg:grid-cols-3 place-items-center mt-9 mb-9 border-t-2 border-black-200">
         {categoryProducts
           ? categoryProducts.map((product, index) => (
