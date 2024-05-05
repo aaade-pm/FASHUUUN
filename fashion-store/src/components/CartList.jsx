@@ -49,7 +49,15 @@ const CartList = ({ bg, text, cartText, width }) => {
             <div className="details-and-remove w-[300px] flex justify-between place-items-center mx-2 ">
               <div className="cart-details">
                 <h1 className="font-bold">{piece.title}</h1>
-                <p>${piece.price.toFixed(2)}</p>
+                <p className="flex gap-2">
+                  <span>${piece.price.toFixed(2)}</span>
+                  <span>x</span>
+                  <span>{piece.quantity}</span>
+                  <span>=</span>
+                  <span className="font-bold text-lime-900">
+                    ${piece.product_total.toFixed(2)}
+                  </span>
+                </p>
               </div>
 
               <div className="cart-remove">

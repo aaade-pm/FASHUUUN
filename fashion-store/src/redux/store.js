@@ -10,6 +10,7 @@ import userReducer from "./slices/userSlice";
 import userProfileReducer from "./slices/profileSlice";
 import loadingReducer from "./slices/loadingSlice";
 import categoryTriggerReducer from "./slices/categoryTriggerSlice";
+import quantityReducer from "./slices/quantitySlice";
 
 export const store = configureStore({
   reducer: {
@@ -23,6 +24,7 @@ export const store = configureStore({
     userProfile: userProfileReducer,
     loading: loadingReducer,
     categoryTrigger: categoryTriggerReducer,
+    quantity: quantityReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(productApi.middleware),

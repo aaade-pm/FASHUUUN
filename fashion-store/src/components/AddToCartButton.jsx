@@ -4,7 +4,7 @@ import ProtoTypes from "prop-types";
 import supabase from "../supabase";
 
 const AddToCartButton = (props) => {
-  const { id, title, price, image } = props;
+  const { id, title, price, image, productTotal, quantity } = props;
   const user = useSelector((state) => state.user.user);
   const cart = useSelector((state) => state.addToCart.cart);
 
@@ -27,6 +27,8 @@ const AddToCartButton = (props) => {
             title: title,
             price: price,
             image: image,
+            product_total: productTotal,
+            quantity: quantity,
           })
           .single();
 
@@ -64,6 +66,8 @@ AddToCartButton.propTypes = {
   title: ProtoTypes.string.isRequired,
   price: ProtoTypes.number.isRequired,
   image: ProtoTypes.string.isRequired,
+  productTotal: ProtoTypes.number.isRequired,
+  quantity: ProtoTypes.number.isRequired,
 };
 
 export default AddToCartButton;
