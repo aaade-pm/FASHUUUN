@@ -4,11 +4,17 @@ import { RiCloseFill } from "react-icons/ri";
 import CartList from "./CartList";
 import Loader from "./Loader";
 import useGetProducts from "../custom_hooks/useGetProducts";
+import { useMemo } from "react";
 
 const Cart = () => {
   useGetProducts();
   const dispatch = useDispatch();
   const loading = useSelector((state) => state.loading.isLoading);
+  const cart = useSelector((state) => state.addToCart.cart);
+  const sum = useMemo(
+    () => cart?.reduce((acc, item) => acc + item.product_total, 0).toFixed(2),
+    [cart]
+  );
 
   const handleCloseCart = () => {
     dispatch(triggerCart());
@@ -22,6 +28,9 @@ const Cart = () => {
         </button>
         <h1 className="text-white absolute top-3 left-5 font-bold text-xl">
           Cart
+        </h1>
+        <h1 className="text-white absolute top-5 right-32 font-bold text-sm">
+          TOTAL : <span className="text-lime-200 font-bold">${sum}</span>
         </h1>
         {loading ? (
           <Loader color="#fff" />

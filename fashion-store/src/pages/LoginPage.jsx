@@ -1,5 +1,4 @@
 import { Auth } from "@supabase/auth-ui-react";
-import { ThemeSupa } from "@supabase/auth-ui-shared";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import supabase from "../supabase";
@@ -18,14 +17,42 @@ const LoginPage = () => {
     });
   }, [navigate]);
   return (
-    <div className="bg-black grid place-items-center h-[100vh]">
-      <h1>LoginPage</h1>
-      <Auth
-        supabaseClient={supabase}
-        appearance={{ theme: ThemeSupa }}
-        theme="dark"
-        providers={[]}
-      />
+    <div>
+      <h1 className="text-black text-center text-2xl font-bold mt-[20vh]">
+        FASHUUN LOGIN PAGE
+      </h1>
+
+      <div className=" mx-12 mt-6">
+        <Auth
+          supabaseClient={supabase}
+          appearance={{
+            style: {
+              button: {
+                backgroundColor: "#000",
+                color: "#fff",
+                padding: "10px",
+                borderRadius: "7px",
+              },
+
+              input: {
+                backgroundColor: "#000",
+                color: "#fff",
+                padding: "10px",
+                borderRadius: "7px",
+              },
+
+              label: {
+                color: "#000",
+                fontSize: "20px",
+                fontWeight: "bold",
+                marginBottom: "10px",
+              },
+            },
+          }}
+          theme="default"
+          providers={[]}
+        />
+      </div>
     </div>
   );
 };

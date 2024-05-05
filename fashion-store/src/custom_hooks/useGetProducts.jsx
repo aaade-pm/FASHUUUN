@@ -10,7 +10,7 @@ const useGetProducts = () => {
 
   useEffect(() => {
     getProducts();
-  });
+  }, [user]);
 
   const getProducts = async () => {
     try {
@@ -28,7 +28,7 @@ const useGetProducts = () => {
         }
       }
     } catch (error) {
-      alert(error.message);
+      console.log(error.message);
     }
   };
 };

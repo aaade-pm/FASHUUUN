@@ -5,12 +5,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { RiCloseFill } from "react-icons/ri";
 import AddToCartButton from "./AddToCartButton";
 import QuantitySelector from "./QuantitySelector";
+import { useMemo } from "react";
 
 const Modal = ({ product }) => {
   const dispatch = useDispatch();
   const quantity = useSelector((state) => state.quantity.quantity);
   const formattedPrice = product.price.toFixed(2);
-  const productTotal = product.price * quantity;
+  const productTotal = useMemo(
+    () => product.price * quantity,
+    [quantity, product.price]
+  );
   const handleCloseModal = () => {
     dispatch(closeModal());
     dispatch(setQuantity(1));
@@ -22,7 +26,10 @@ const Modal = ({ product }) => {
         size={30}
         className="absolute top-5 right-5"
       />
-      <div className="modal lg:flex grid justify-center lg:gap-48 gap-16">
+      <div
+        key={product.id}
+        className="modal lg:flex grid justify-center lg:gap-48 gap-16"
+      >
         <div className="product-image lg:w-[30vw] w-[50vw] lg:h-[75vh] md:h-[40vh] h-[30vh] mx-auto object-cover">
           <img
             src={product.image}
@@ -41,14 +48,14 @@ const Modal = ({ product }) => {
           <p className="text-black text-center md:text-2xl md:p-8 lg:p-0 px-2 ">
             {product.description}
           </p>
-          <div className="flex gap-20 place-items-center">
+          <div className="flex mt-3 gap-20 place-items-center">
             <QuantitySelector />
             <AddToCartButton
               id={product.id}
               title={product.title}
               price={product.price}
               image={product.image}
-              productTotal={productTotal.toFixed(2)}
+              productTotal={productTotal}
               quantity={quantity}
             />
           </div>

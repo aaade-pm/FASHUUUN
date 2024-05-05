@@ -5,20 +5,44 @@ import supabase from "../supabase";
 
 const AddToCartButton = (props) => {
   const { id, title, price, image, productTotal, quantity } = props;
+  const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user);
   const cart = useSelector((state) => state.addToCart.cart);
 
-  const dispatch = useDispatch();
+  const isItemInCart = cart?.filtsome((item) => item.id === id);
+  if (isItemInCart) {
+    alert("Item already exists in the cart.");
+    return;
+  }
 
   const handleAddToCart = async () => {
     try {
-      if (user && user.id) {
-        const isItemInCart = cart?.some((item) => item.id === id);
-        if (isItemInCart) {
-          alert("Item already exists in the cart.");
-          return;
+      if (user && user.id && !isItemInCart) {
+        const { data, error } = await supabase
+          .from("cart_products")
+          .insert({
+            user_id: user.id,
+            id: id,
+            title: title,
+            price: price,
+            image: image,
+            product_total: productTotal,
+            quantity: quantity,
+          })
+          .single();
+
+        if (error) {
+          if (error.details?.includes("already exists")) {
+            alert("Item already exists in the cart.");
+          } else {
+            throw error;
+          }
         }
 
+        if (data !== null && !isItemInCart) {
+          dispatch(addToCart(data));
+        }
+      } else {
         const { data, error } = await supabase
           .from("cart_products")
           .insert({
