@@ -1,5 +1,6 @@
 import { useGetCategoriesQuery } from "../redux/service/productData";
 import PropTypes from "prop-types";
+import React from "react";
 import Loader from "./Loader";
 import { FaAngleDown } from "react-icons/fa";
 import { setCategoryTrigger } from "../redux/slices/categoryTriggerSlice";
@@ -76,4 +77,6 @@ CategoryButtons.propTypes = {
   handleAllProducts: PropTypes.func.isRequired,
 };
 
-export default CategoryButtons;
+const MemoizedCategoryButtons = React.memo(CategoryButtons);
+
+export default MemoizedCategoryButtons;

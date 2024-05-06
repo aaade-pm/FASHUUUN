@@ -21,7 +21,7 @@ const Cart = () => {
   };
 
   return (
-    <div>
+    <>
       <div className="hidden lg:block lg:w-[450px] w-full lg:h-[320px] h-full z-[100] absolute top-16 lg:right-1 py-3 bg-black overflow-y-scroll">
         <button onClick={handleCloseCart} className="text-white">
           <RiCloseFill size={30} className="absolute top-3 right-5" />
@@ -40,7 +40,7 @@ const Cart = () => {
           </div>
         )}
       </div>
-    </div>
+    </>
   );
 };
 

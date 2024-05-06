@@ -17,7 +17,7 @@ const LoginPage = () => {
     });
   }, [navigate]);
   return (
-    <div>
+    <>
       <h1 className="text-black text-center text-2xl font-bold mt-[20vh]">
         FASHUUN LOGIN PAGE
       </h1>
@@ -53,7 +53,7 @@ const LoginPage = () => {
           providers={[]}
         />
       </div>
-    </div>
+    </>
   );
 };
 

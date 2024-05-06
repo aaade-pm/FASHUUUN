@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../redux/slices/addToCartSlice";
 import ProtoTypes from "prop-types";
 import supabase from "../supabase";
+import React from "react";
 
 const AddToCartButton = (props) => {
   const { id, title, price, image, productTotal, quantity } = props;
@@ -9,7 +10,7 @@ const AddToCartButton = (props) => {
   const user = useSelector((state) => state.user.user);
   const cart = useSelector((state) => state.addToCart.cart);
 
-  const isItemInCart = cart?.filtsome((item) => item.id === id);
+  const isItemInCart = cart?.some((item) => item.id === id);
   if (isItemInCart) {
     alert("Item already exists in the cart.");
     return;
@@ -94,4 +95,5 @@ AddToCartButton.propTypes = {
   quantity: ProtoTypes.number.isRequired,
 };
 
-export default AddToCartButton;
+const MemoizedAddToCartButton = React.memo(AddToCartButton);
+export default MemoizedAddToCartButton;

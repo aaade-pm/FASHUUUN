@@ -1,10 +1,11 @@
 import { RiCloseFill } from "react-icons/ri";
 import Navlinks from "../constants";
 import PropTypes from "prop-types";
+import React from "react";
 
 const MobileNav = ({ mobileNavOpen, handleCloseMobileNav }) => {
   return (
-    <div>
+    <>
       {mobileNavOpen && (
         <div className="mobile-nav w-[75vw] h-[100vh]  fixed top-0 left-0 bg-white z-[1000] grid place-items-center">
           <RiCloseFill
@@ -25,7 +26,7 @@ const MobileNav = ({ mobileNavOpen, handleCloseMobileNav }) => {
           </div>
         </div>
       )}
-    </div>
+    </>
   );
 };
 
@@ -34,4 +35,5 @@ MobileNav.propTypes = {
   handleCloseMobileNav: PropTypes.func.isRequired,
 };
 
-export default MobileNav;
+const MemoizedMobileNav = React.memo(MobileNav);
+export default MemoizedMobileNav;

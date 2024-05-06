@@ -1,20 +1,22 @@
 import { setQuantity } from "../redux/slices/quantitySlice";
 import { useDispatch, useSelector } from "react-redux";
+import { useCallback } from "react";
 
 const QuantitySelector = () => {
   const dispatch = useDispatch();
   const quantity = useSelector((state) => state.quantity.quantity);
-  const handleIncrement = () => {
+  const handleIncrement = useCallback(() => {
     dispatch(setQuantity(quantity + 1));
-  };
+  }, [quantity, dispatch]);
 
-  const handleDecrement = () => {
+  const handleDecrement = useCallback(() => {
     if (quantity > 1) {
       dispatch(setQuantity(quantity - 1));
     }
-  };
+  }, [quantity, dispatch]);
+
   return (
-    <div>
+    <>
       <div className="flex justify-center items-center">
         <button
           onClick={handleDecrement}
@@ -22,7 +24,7 @@ const QuantitySelector = () => {
         >
           -
         </button>
-        <span className="px-4 py-2">{quantity}</span>
+        <span className="px-4 py-2 font-bold">{quantity}</span>
         <button
           onClick={handleIncrement}
           className="px-4 py-2 bg-gray-200 rounded-lg"
@@ -30,7 +32,7 @@ const QuantitySelector = () => {
           +
         </button>
       </div>
-    </div>
+    </>
   );
 };
 

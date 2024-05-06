@@ -3,6 +3,7 @@ import { removeFromCart } from "../redux/slices/addToCartSlice";
 import { useDispatch, useSelector } from "react-redux";
 import supabase from "../supabase";
 import PropTypes from "prop-types";
+import React from "react";
 
 const CartList = ({ bg, text, cartText, width }) => {
   const dispatch = useDispatch();
@@ -83,4 +84,6 @@ CartList.propTypes = {
   cartText: PropTypes.string,
   width: PropTypes.number,
 };
-export default CartList;
+
+const MemoizedCartList = React.memo(CartList);
+export default MemoizedCartList;
