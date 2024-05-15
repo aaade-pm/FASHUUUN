@@ -14,6 +14,7 @@ const Hero = () => {
               objectFit: "cover",
               position: "relative",
             }}
+            loading="lazy"
           />
         </div>
         <div className="hero-text absolute md:top-10 md:left-14 lg:top-10 top-3 lg:left-12 left-3">
