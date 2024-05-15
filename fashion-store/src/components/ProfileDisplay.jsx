@@ -3,6 +3,7 @@ import { FaRegHeart } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import supabase from "../supabase";
 import { setUser } from "../redux/slices/userSlice";
+import { profileTrigger } from "../redux/slices/profileSlice";
 
 const ProfileDisplay = () => {
   const navigate = useNavigate();
@@ -55,6 +56,9 @@ const ProfileDisplay = () => {
       <div
         onClick={() => {
           navigate("/cart");
+          setTimeout(() => {
+            dispatch(profileTrigger());
+          }, 800);
         }}
         className=" border-2 border-white mt-4 w-[280px] text-center flex lg:hidden justify-center place-items-center content-center gap-1 py-1 hover:bg-white hover:text-black"
       >

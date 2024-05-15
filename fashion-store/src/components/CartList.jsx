@@ -47,7 +47,7 @@ const CartList = ({ bg, text, cartText, width }) => {
                 />
               </div>
             </div>
-            <div className="details-and-remove w-[300px] flex justify-between place-items-center mx-2 ">
+            <div className="details-and-remove w-[305px] flex justify-between place-items-center mx-2">
               <div className="cart-details">
                 <h1 className="font-bold">{piece.title}</h1>
                 <p className="flex gap-2">

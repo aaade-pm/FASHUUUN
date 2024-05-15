@@ -22,7 +22,7 @@ const LoginPage = () => {
         FASHUUN LOGIN PAGE
       </h1>
 
-      <div className=" mx-12 mt-6">
+      <div className=" mx-12 lg:mx-60 mt-6">
         <Auth
           supabaseClient={supabase}
           appearance={{

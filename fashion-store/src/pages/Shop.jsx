@@ -1,5 +1,6 @@
 import { openModal } from "../redux/slices/modalSlice";
 import { setCategory } from "../redux/slices/categorySlice";
+import { setCategoryTrigger } from "../redux/slices/categoryTriggerSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 
@@ -15,6 +16,10 @@ const Shop = () => {
   const dispatch = useDispatch();
   const modalOpen = useSelector((state) => state.modal.modalOpen);
   const categoryProducts = useSelector((state) => state.category.category);
+  const categoryTrigger = useSelector(
+    (state) => state.categoryTrigger.categoryTrigger
+  );
+
   const { data, error, isLoading } = useGetProductsQuery();
   const products = data;
   if (isLoading) return <Loader color={"#000"} />;
@@ -31,10 +36,16 @@ const Shop = () => {
       (product) => product.category === category
     );
     dispatch(setCategory(newProducts));
+    setTimeout(() => {
+      dispatch(setCategoryTrigger(!categoryTrigger));
+    }, 800);
   };
 
   const allProducts = () => {
     dispatch(setCategory(null));
+    setTimeout(() => {
+      dispatch(setCategoryTrigger(!categoryTrigger));
+    }, 800);
   };
 
   return (
