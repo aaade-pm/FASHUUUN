@@ -31,7 +31,7 @@ const CartList = ({ bg, text, cartText, width }) => {
 
   return (
     <div>
-      {cart ? (
+      {cart != null && cart.length > 0 ? (
         cart.map((piece) => (
           <div
             key={piece.id}
@@ -70,8 +70,11 @@ const CartList = ({ bg, text, cartText, width }) => {
           </div>
         ))
       ) : (
-        <div className="empty-cart grid place-items-center mt-20 font-bold text-2xl">
-          <p style={{ color: cartText }}>Cart is empty</p>
+        <div
+          style={{ color: cartText }}
+          className="empty-cart grid place-items-center mt-20 font-bold text-2xl"
+        >
+          <p>Cart is empty</p>
         </div>
       )}
     </div>

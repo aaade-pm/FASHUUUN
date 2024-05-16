@@ -2,14 +2,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { triggerCart } from "../redux/slices/cartTriggerSlice";
 import { RiCloseFill } from "react-icons/ri";
 import CartList from "./CartList";
-import Loader from "./Loader";
 import useGetProducts from "../custom_hooks/useGetProducts";
 import { useMemo } from "react";
 
 const Cart = () => {
   useGetProducts();
   const dispatch = useDispatch();
-  const loading = useSelector((state) => state.loading.isLoading);
   const cart = useSelector((state) => state.addToCart.cart);
   const sum = useMemo(
     () => cart?.reduce((acc, item) => acc + item.product_total, 0).toFixed(2),
@@ -30,15 +28,16 @@ const Cart = () => {
           Cart
         </h1>
         <h1 className="text-white absolute top-5 right-32 font-bold text-sm">
-          TOTAL : <span className="text-lime-200 font-bold">${sum}</span>
+          TOTAL:
+          {sum ? (
+            <span className="text-lime-200 font-bold"> ${sum}</span>
+          ) : (
+            <span className="text-lime-200 font-bold"> $0.00</span>
+          )}
         </h1>
-        {loading ? (
-          <Loader color="#fff" />
-        ) : (
-          <div className="cart-item py-4">
-            <CartList bg={"#fff"} text={"#000"} cartText={"#fff"} width={95} />
-          </div>
-        )}
+        <div className="cart-item py-4">
+          <CartList bg={"#fff"} text={"#000"} cartText={"#fff"} width={95} />
+        </div>
       </div>
     </>
   );

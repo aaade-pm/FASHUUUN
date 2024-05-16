@@ -10,7 +10,7 @@ const useGetProducts = () => {
 
   useEffect(() => {
     getProducts();
-  }, []);
+  });
 
   const getProducts = async () => {
     try {
